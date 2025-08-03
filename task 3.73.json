@@ -1,0 +1,103 @@
+'use client';
+
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Leaf, Zap, Globe, Users } from 'lucide-react';
+
+export default function AboutSection() {
+  const values = [
+    {
+      icon: <Leaf className="h-8 w-8" />,
+      title: 'Sustainability',
+      description: 'Accelerating the world\'s transition to sustainable energy through innovative electric vehicles and renewable energy solutions.'
+    },
+    {
+      icon: <Zap className="h-8 w-8" />,
+      title: 'Innovation',
+      description: 'Pushing the boundaries of automotive technology with cutting-edge features like Autopilot, Over-the-Air updates, and more.'
+    },
+    {
+      icon: <Globe className="h-8 w-8" />,
+      title: 'Global Impact',
+      description: 'Creating a positive environmental impact worldwide with zero-emission vehicles and sustainable energy products.'
+    },
+    {
+      icon: <Users className="h-8 w-8" />,
+      title: 'Community',
+      description: 'Building a community of forward-thinking individuals committed to creating a better future for generations to come.'
+    }
+  ];
+
+  return (
+    <section id="discover" className="py-20 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '3s' }}></div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl sm:text-5xl font-bold font-space-grotesk mb-6">
+            Our <span className="text-gradient">Mission</span>
+          </h2>
+          <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8">
+            Tesla's mission is to accelerate the world's transition to sustainable energy. 
+            We design, develop, manufacture and sell high-performance fully electric vehicles 
+            and infinitely scalable clean energy generation and storage products.
+          </p>
+        </div>
+
+        {/* Mission Statement */}
+        <div className="glass-effect rounded-3xl p-8 sm:p-12 mb-16 text-center">
+          <blockquote className="text-2xl sm:text-3xl font-light italic mb-6">
+            "The future of transport is electric. We're here to make it happen."
+          </blockquote>
+          <cite className="text-lg text-white/80">— Elon Musk, CEO</cite>
+        </div>
+
+        {/* Values Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {values.map((value, index) => (
+            <Card key={value.title} className="bg-white/10 backdrop-blur-md border-white/20 text-white group hover:bg-white/20 transition-all duration-300">
+              <CardContent className="p-6 text-center">
+                <div className="text-red-400 mb-4 flex justify-center group-hover:scale-110 transition-transform duration-300">
+                  {value.icon}
+                </div>
+                <h3 className="text-xl font-bold font-space-grotesk mb-3">{value.title}</h3>
+                <p className="text-white/80 text-sm leading-relaxed">{value.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Stats Section */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          <div className="text-center">
+            <div className="text-4xl sm:text-5xl font-bold text-gradient mb-2">5.6B</div>
+            <p className="text-white/80">Miles Driven Autonomously</p>
+          </div>
+          <div className="text-center">
+            <div className="text-4xl sm:text-5xl font-bold text-gradient mb-2">40+</div>
+            <p className="text-white/80">Countries Worldwide</p>
+          </div>
+          <div className="text-center">
+            <div className="text-4xl sm:text-5xl font-bold text-gradient mb-2">99.9%</div>
+            <p className="text-white/80">Uptime Guarantee</p>
+          </div>
+          <div className="text-center">
+            <div className="text-4xl sm:text-5xl font-bold text-gradient mb-2">24/7</div>
+            <p className="text-white/80">Customer Support</p>
+          </div>
+        </div>
+
+        {/* CTA */}
+        <div className="text-center">
+          <Button size="lg" className="bg-white text-black hover:bg-gray-100 text-lg px-8 py-4 rounded-full">
+            Join the Revolution
+          </Button>
+        </div>
+      </div>
+    </section>
+  );
+}

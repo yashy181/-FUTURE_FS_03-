@@ -1,0 +1,31 @@
+import './globals.css';
+import type { Metadata } from 'next';
+import { Inter, Space_Grotesk } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space-grotesk' });
+
+export const metadata: Metadata = {
+  title: 'Tesla | Electric Vehicles, Solar & Clean Energy',
+  description: 'Tesla is accelerating the world\'s transition to sustainable energy with electric cars, solar and integrated renewable energy solutions.',
+  keywords: 'Tesla, electric vehicles, solar energy, sustainable transport, Model S, Model 3, Model X, Model Y',
+  openGraph: {
+    title: 'Tesla | Electric Vehicles, Solar & Clean Energy',
+    description: 'Tesla is accelerating the world\'s transition to sustainable energy with electric cars, solar and integrated renewable energy solutions.',
+    type: 'website',
+  },
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" className="scroll-smooth">
+      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
+        {children}
+      </body>
+    </html>
+  );
+}

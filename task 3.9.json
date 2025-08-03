@@ -1,0 +1,182 @@
+'use client';
+
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+
+export default function ContactSection() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    interest: '',
+    message: ''
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Form submitted:', formData);
+    // Handle form submission here
+  };
+
+  const handleChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const contactInfo = [
+    {
+      icon: <MapPin className="h-6 w-6" />,
+      title: 'Visit Us',
+      details: ['1 Tesla Road', 'Austin, TX 78725', 'United States']
+    },
+    {
+      icon: <Phone className="h-6 w-6" />,
+      title: 'Call Us',
+      details: ['+1 (888) 518-3752', 'Sales: +1 (800) 613-8840', 'Support: +1 (877) 798-3752']
+    },
+    {
+      icon: <Mail className="h-6 w-6" />,
+      title: 'Email Us',
+      details: ['info@tesla.com', 'sales@tesla.com', 'support@tesla.com']
+    },
+    {
+      icon: <Clock className="h-6 w-6" />,
+      title: 'Business Hours',
+      details: ['Mon-Fri: 9:00 AM - 8:00 PM', 'Saturday: 10:00 AM - 6:00 PM', 'Sunday: 11:00 AM - 5:00 PM']
+    }
+  ];
+
+  return (
+    <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl sm:text-5xl font-bold font-space-grotesk mb-6">
+            Get in <span className="text-gradient">Touch</span>
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Ready to join the electric revolution? Contact us to learn more about our vehicles, 
+            schedule a test drive, or get answers to your questions.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Contact Form */}
+          <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+            <CardHeader>
+              <CardTitle className="text-2xl font-space-grotesk">Send us a Message</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Full Name</label>
+                    <Input
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) => handleChange('name', e.target.value)}
+                      placeholder="John Doe"
+                      required
+                      className="border-gray-300 focus:border-red-500 focus:ring-red-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Email</label>
+                    <Input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => handleChange('email', e.target.value)}
+                      placeholder="john@example.com"
+                      required
+                      className="border-gray-300 focus:border-red-500 focus:ring-red-500"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Phone</label>
+                    <Input
+                      type="tel"
+                      value={formData.phone}
+                      onChange={(e) => handleChange('phone', e.target.value)}
+                      placeholder="+1 (555) 123-4567"
+                      className="border-gray-300 focus:border-red-500 focus:ring-red-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Interest</label>
+                    <Select value={formData.interest} onValueChange={(value) => handleChange('interest', value)}>
+                      <SelectTrigger className="border-gray-300 focus:border-red-500 focus:ring-red-500">
+                        <SelectValue placeholder="Select your interest" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="model-s">Model S</SelectItem>
+                        <SelectItem value="model-3">Model 3</SelectItem>
+                        <SelectItem value="model-x">Model X</SelectItem>
+                        <SelectItem value="model-y">Model Y</SelectItem>
+                        <SelectItem value="solar">Solar Panels</SelectItem>
+                        <SelectItem value="charging">Charging Solutions</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Message</label>
+                  <Textarea
+                    value={formData.message}
+                    onChange={(e) => handleChange('message', e.target.value)}
+                    placeholder="Tell us how we can help you..."
+                    rows={5}
+                    className="border-gray-300 focus:border-red-500 focus:ring-red-500"
+                  />
+                </div>
+
+                <Button type="submit" className="w-full bg-red-500 hover:bg-red-600 text-white text-lg py-3">
+                  Send Message
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+
+          {/* Contact Information */}
+          <div className="space-y-6">
+            {contactInfo.map((info, index) => (
+              <Card key={info.title} className="shadow-md border-0 bg-white/80 backdrop-blur-sm hover:shadow-lg transition-shadow">
+                <CardContent className="p-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="text-red-500 mt-1">
+                      {info.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold font-space-grotesk mb-2">{info.title}</h3>
+                      <div className="space-y-1">
+                        {info.details.map((detail, i) => (
+                          <p key={i} className="text-gray-600">{detail}</p>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+
+            {/* Map placeholder */}
+            <Card className="shadow-md border-0 bg-white/80 backdrop-blur-sm">
+              <CardContent className="p-0">
+                <div className="h-64 bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg flex items-center justify-center">
+                  <p className="text-gray-600 font-medium">Interactive Map Coming Soon</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

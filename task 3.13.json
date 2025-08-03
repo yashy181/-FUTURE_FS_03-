@@ -1,0 +1,146 @@
+'use client';
+
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { ArrowRight, Zap, Shield, Gauge } from 'lucide-react';
+
+export default function VehicleShowcase() {
+  const vehicles = [
+    {
+      name: 'Model S',
+      type: 'Sedan',
+      price: 'From $94,990',
+      image: 'https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=800',
+      specs: {
+        range: '405 mi',
+        acceleration: '1.99s 0-60 mph',
+        topSpeed: '200 mph'
+      },
+      features: ['Autopilot Included', 'Premium Interior', 'Glass Roof'],
+      badge: 'Flagship'
+    },
+    {
+      name: 'Model 3',
+      type: 'Sedan',
+      price: 'From $38,990',
+      image: 'https://images.pexels.com/photos/3849567/pexels-photo-3849567.jpeg?auto=compress&cs=tinysrgb&w=800',
+      specs: {
+        range: '358 mi',
+        acceleration: '3.1s 0-60 mph',
+        topSpeed: '162 mph'
+      },
+      features: ['Standard Autopilot', 'Minimalist Interior', 'Over-the-Air Updates'],
+      badge: 'Best Seller'
+    },
+    {
+      name: 'Model X',
+      type: 'SUV',
+      price: 'From $98,990',
+      image: 'https://images.pexels.com/photos/3849554/pexels-photo-3849554.jpeg?auto=compress&cs=tinysrgb&w=800',
+      specs: {
+        range: '348 mi',
+        acceleration: '2.5s 0-60 mph',
+        topSpeed: '163 mph'
+      },
+      features: ['Falcon Wing Doors', '7-Seat Capacity', 'Towing Capacity'],
+      badge: 'Utility'
+    },
+    {
+      name: 'Model Y',
+      type: 'SUV',
+      price: 'From $52,990',
+      image: 'https://images.pexels.com/photos/3849278/pexels-photo-3849278.jpeg?auto=compress&cs=tinysrgb&w=800',
+      specs: {
+        range: '330 mi',
+        acceleration: '3.5s 0-60 mph',
+        topSpeed: '155 mph'
+      },
+      features: ['Panoramic Glass Roof', 'Spacious Interior', 'Advanced Safety'],
+      badge: 'Popular'
+    }
+  ];
+
+  return (
+    <section id="vehicles" className="py-20 bg-gradient-to-br from-gray-50 to-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl sm:text-5xl font-bold font-space-grotesk mb-6">
+            Our Vehicle <span className="text-gradient">Lineup</span>
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Choose from our range of premium electric vehicles, each designed to redefine 
+            your driving experience with cutting-edge technology and sustainable performance.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {vehicles.map((vehicle, index) => (
+            <Card key={vehicle.name} className="group overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 bg-white/80 backdrop-blur-sm">
+              <div className="relative">
+                <img 
+                  src={vehicle.image} 
+                  alt={vehicle.name}
+                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <Badge className="absolute top-4 left-4 bg-red-500 text-white">
+                  {vehicle.badge}
+                </Badge>
+              </div>
+              
+              <CardContent className="p-6">
+                <div className="flex justify-between items-start mb-4">
+                  <div>
+                    <h3 className="text-2xl font-bold font-space-grotesk">{vehicle.name}</h3>
+                    <p className="text-gray-600">{vehicle.type}</p>
+                  </div>
+                  <p className="text-xl font-semibold text-red-500">{vehicle.price}</p>
+                </div>
+
+                {/* Specs */}
+                <div className="grid grid-cols-3 gap-4 mb-6">
+                  <div className="text-center">
+                    <Zap className="h-6 w-6 mx-auto mb-2 text-blue-500" />
+                    <p className="text-sm font-semibold">{vehicle.specs.range}</p>
+                    <p className="text-xs text-gray-500">Range</p>
+                  </div>
+                  <div className="text-center">
+                    <Gauge className="h-6 w-6 mx-auto mb-2 text-green-500" />
+                    <p className="text-sm font-semibold">{vehicle.specs.acceleration}</p>
+                    <p className="text-xs text-gray-500">Acceleration</p>
+                  </div>
+                  <div className="text-center">
+                    <Shield className="h-6 w-6 mx-auto mb-2 text-purple-500" />
+                    <p className="text-sm font-semibold">{vehicle.specs.topSpeed}</p>
+                    <p className="text-xs text-gray-500">Top Speed</p>
+                  </div>
+                </div>
+
+                {/* Features */}
+                <div className="mb-6">
+                  <div className="flex flex-wrap gap-2">
+                    {vehicle.features.map((feature) => (
+                      <Badge key={feature} variant="secondary" className="text-xs">
+                        {feature}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex gap-3">
+                  <Button className="flex-1 bg-red-500 hover:bg-red-600 text-white">
+                    Order Now
+                  </Button>
+                  <Button variant="outline" className="flex-1 group border-gray-300">
+                    Learn More
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
